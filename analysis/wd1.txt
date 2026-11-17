@@ -1,0 +1,143 @@
+==============================================================================
+a(Landroid/content/Context;)Ljava/lang/String;
+  0000 sget-object              v0, La/wd1;->a Lorg/json/JSONObject;
+  0004 const-string             v1, ""
+  0008 if-eqz                   v0, +00eh
+  000c sget-object              v2, Lcom/VexR/app/utils/InternalResolver;->INSTANCE Lcom/VexR/app/utils/InternalResolver;
+  0010 invoke-virtual           v2, Lcom/VexR/app/utils/InternalResolver;->getPortKey()Ljava/lang/String;
+  0016 move-result-object       v2
+  0018 invoke-virtual           v0, v2, v1, Lorg/json/JSONObject;->optString(Ljava/lang/String; Ljava/lang/String;)Ljava/lang/String;
+  001e move-result-object       v0
+  0020 if-nez                   v0, +003h
+  0024 move-object              v0, v1
+  0026 invoke-virtual           v0, Ljava/lang/String;->length()I
+  002c move-result              v2
+  002e if-lez                   v2, +003h
+  0032 return-object            v0
+  0034 if-eqz                   v3, +034h
+  0038 invoke-virtual           v3, Landroid/content/Context;->getAssets()Landroid/content/res/AssetManager;
+  003e move-result-object       v3
+  0040 const-string             v0, "sudoport.txt"
+  0044 invoke-virtual           v3, v0, Landroid/content/res/AssetManager;->open(Ljava/lang/String;)Ljava/io/InputStream;
+  004a move-result-object       v3
+  004c invoke-virtual           v3, Ljava/lang/Object;->getClass()Ljava/lang/Class;
+  0052 sget-object              v0, La/le;->a Ljava/nio/charset/Charset;
+  0056 new-instance             v2, Ljava/io/InputStreamReader;
+  005a invoke-direct            v2, v3, v0, Ljava/io/InputStreamReader;-><init>(Ljava/io/InputStream; Ljava/nio/charset/Charset;)V
+  0060 new-instance             v3, Ljava/io/BufferedReader;
+  0064 const/16                 v0, 8192
+  0068 invoke-direct            v3, v2, v0, Ljava/io/BufferedReader;-><init>(Ljava/io/Reader; I)V
+  006e invoke-static            v3, La/nw1;->a(Ljava/io/BufferedReader;)Ljava/lang/String;
+  0074 move-result-object       v0
+  0076 invoke-static            v0, La/ns0;->F(Ljava/lang/CharSequence;)Ljava/lang/CharSequence;
+  007c move-result-object       v0
+  007e invoke-virtual           v0, Ljava/lang/Object;->toString()Ljava/lang/String;
+  0084 move-result-object       v0
+  0086 invoke-interface         v3, Ljava/io/Closeable;->close()V
+  008c return-object            v0
+  008e move-exception           v0
+  0090 throw                    v0
+  0092 move-exception           v2
+  0094 invoke-static            v3, v0, La/rf1;->a(Ljava/io/Closeable; Ljava/lang/Throwable;)V
+  009a throw                    v2
+  009c return-object            v1
+==============================================================================
+b(Landroid/content/Context;)V
+  0000 invoke-virtual           v6, Ljava/lang/Object;->getClass()Ljava/lang/Class;
+  0006 sget-boolean             v0, La/wd1;->b Z
+  000a if-eqz                   v0, +003h
+  000e return-void              
+  0010 invoke-virtual           v6, Landroid/content/Context;->getAssets()Landroid/content/res/AssetManager;
+  0016 move-result-object       v6
+  0018 sget-object              v0, Lcom/VexR/app/utils/InternalResolver;->INSTANCE Lcom/VexR/app/utils/InternalResolver;
+  001c invoke-virtual           v0, Lcom/VexR/app/utils/InternalResolver;->getConfigName()Ljava/lang/String;
+  0022 move-result-object       v0
+  0024 invoke-virtual           v6, v0, Landroid/content/res/AssetManager;->open(Ljava/lang/String;)Ljava/io/InputStream;
+  002a move-result-object       v6
+  002c invoke-virtual           v6, Ljava/lang/Object;->getClass()Ljava/lang/Class;
+  0032 new-instance             v0, Ljava/io/ByteArrayOutputStream;
+  0036 invoke-virtual           v6, Ljava/io/InputStream;->available()I
+  003c move-result              v1
+  003e const/16                 v2, 8192
+  0042 invoke-static            v2, v1, Ljava/lang/Math;->max(I I)I
+  0048 move-result              v1
+  004a invoke-direct            v0, v1, Ljava/io/ByteArrayOutputStream;-><init>(I)V
+  0050 new-array                v1, v2, [B
+  0054 invoke-virtual           v6, v1, Ljava/io/InputStream;->read([B)I
+  005a move-result              v2
+  005c const/4                  v3, 0
+  005e if-ltz                   v2, +00ah
+  0062 invoke-virtual           v0, v1, v3, v2, Ljava/io/OutputStream;->write([B I I)V
+  0068 invoke-virtual           v6, v1, Ljava/io/InputStream;->read([B)I
+  006e move-result              v2
+  0070 goto                     -ah
+  0072 invoke-virtual           v0, Ljava/io/ByteArrayOutputStream;->toByteArray()[B
+  0078 move-result-object       v6
+  007a invoke-virtual           v6, Ljava/lang/Object;->getClass()Ljava/lang/Class;
+  0080 sget-object              v0, Lcom/VexR/app/utils/NativeSecurity;->INSTANCE Lcom/VexR/app/utils/NativeSecurity;
+  0084 invoke-virtual           v0, Lcom/VexR/app/utils/NativeSecurity;->getSecretKey()Ljava/lang/String;
+  008a move-result-object       v0
+  008c sget-object              v1, La/le;->a Ljava/nio/charset/Charset;
+  0090 invoke-virtual           v0, v1, Ljava/lang/String;->getBytes(Ljava/nio/charset/Charset;)[B
+  0096 move-result-object       v0
+  0098 invoke-virtual           v0, Ljava/lang/Object;->getClass()Ljava/lang/Class;
+  009e array-length             v1, v6
+  00a0 new-array                v1, v1, [B
+  00a4 array-length             v2, v6
+  00a6 if-ge                    v3, v2, +010h
+  00aa aget-byte                v4, v6, v3
+  00ae array-length             v5, v0
+  00b0 rem-int                  v5, v3, v5
+  00b4 aget-byte                v5, v0, v5
+  00b8 xor-int/2addr            v4, v5
+  00ba int-to-byte              v4, v4
+  00bc aput-byte                v4, v1, v3
+  00c0 add-int/lit8             v3, v3, 1
+  00c4 goto                     -fh
+  00c6 new-instance             v6, Ljava/lang/String;
+  00ca sget-object              v0, La/le;->a Ljava/nio/charset/Charset;
+  00ce invoke-direct            v6, v1, v0, Ljava/lang/String;-><init>([B Ljava/nio/charset/Charset;)V
+  00d4 new-instance             v0, Lorg/json/JSONObject;
+  00d8 invoke-direct            v0, v6, Lorg/json/JSONObject;-><init>(Ljava/lang/String;)V
+  00de sput-object              v0, La/wd1;->a Lorg/json/JSONObject;
+  00e2 const/4                  v6, 1
+  00e4 sput-boolean             v6, La/wd1;->b Z
+  00e8 return-void              
+  00ea new-instance             v6, Lorg/json/JSONObject;
+  00ee invoke-direct            v6, Lorg/json/JSONObject;-><init>()V
+  00f4 sput-object              v6, La/wd1;->a Lorg/json/JSONObject;
+  00f8 return-void              
+==============================================================================
+c(Ljava/lang/String;)Z
+  0000 sget-object              v0, La/wd1;->a Lorg/json/JSONObject;
+  0004 if-eqz                   v0, +00dh
+  0008 sget-object              v1, Lcom/VexR/app/utils/InternalResolver;->INSTANCE Lcom/VexR/app/utils/InternalResolver;
+  000c invoke-virtual           v1, Lcom/VexR/app/utils/InternalResolver;->getForceKey()Ljava/lang/String;
+  0012 move-result-object       v1
+  0014 invoke-virtual           v0, v1, Lorg/json/JSONObject;->optJSONObject(Ljava/lang/String;)Lorg/json/JSONObject;
+  001a move-result-object       v0
+  001c goto                     +2h
+  001e const/4                  v0, 0
+  0020 const/4                  v1, 1
+  0022 if-eqz                   v0, +007h
+  0026 invoke-virtual           v0, v2, v1, Lorg/json/JSONObject;->optBoolean(Ljava/lang/String; Z)Z
+  002c move-result              v2
+  002e return                   v2
+  0030 return                   v1
+==============================================================================
+d(Ljava/lang/String;)Z
+  0000 sget-object              v0, La/wd1;->a Lorg/json/JSONObject;
+  0004 if-eqz                   v0, +00dh
+  0008 sget-object              v1, Lcom/VexR/app/utils/InternalResolver;->INSTANCE Lcom/VexR/app/utils/InternalResolver;
+  000c invoke-virtual           v1, Lcom/VexR/app/utils/InternalResolver;->getPermsKey()Ljava/lang/String;
+  0012 move-result-object       v1
+  0014 invoke-virtual           v0, v1, Lorg/json/JSONObject;->optJSONObject(Ljava/lang/String;)Lorg/json/JSONObject;
+  001a move-result-object       v0
+  001c goto                     +2h
+  001e const/4                  v0, 0
+  0020 const/4                  v1, 1
+  0022 if-eqz                   v0, +007h
+  0026 invoke-virtual           v0, v2, v1, Lorg/json/JSONObject;->optBoolean(Ljava/lang/String; Z)Z
+  002c move-result              v2
+  002e return                   v2
+  0030 return                   v1

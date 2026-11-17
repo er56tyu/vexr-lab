@@ -1,0 +1,4 @@
+=== isLoaded accesses ===
+  Lcom/VexR/app/utils/NativeSecurity;->getAuthToken()Ljava/lang/String; :: sget-boolean v0, Lcom/VexR/app/utils/NativeSecurity;->isLoaded Z
+  Lcom/VexR/app/utils/NativeSecurity;->getBaseUrl()Ljava/lang/String; :: sget-boolean v0, Lcom/VexR/app/utils/NativeSecurity;->isLoaded Z
+  Lcom/VexR/app/utils/NativeSecurity;->getSecretKey()Ljava/lang/String; :: sget-boolean v0, Lcom/VexR/app/utils/NativeSecurity;->isLoaded Z

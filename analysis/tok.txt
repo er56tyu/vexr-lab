@@ -1,0 +1,148 @@
+
+=== sp0.d (the request builder) full body ===
+  0000 sget-object              v0, La/sp0;->c Ljava/lang/String;
+  0004 invoke-virtual           v0, Ljava/lang/String;->length()I
+  000a move-result              v0
+  000c if-nez                   v0, +00ah
+  0010 if-eqz                   v11, +007h
+  0014 sget-object              v10, Ljava/lang/Boolean;->FALSE Ljava/lang/Boolean;
+  0018 invoke-virtual           v11, v10, La/i;->invoke(Ljava/lang/Object;)Ljava/lang/Object;
+  001e return-void              
+  0020 const-string             v0, "action=install"
+  0024 const/4                  v1, 0
+  0026 invoke-static            v10, v0, v1, La/ns0;->l(Ljava/lang/CharSequence; Ljava/lang/CharSequence; Z)Z
+  002c move-result              v0
+  002e if-eqz                   v0, +005h
+  0032 const-string             v0, "install"
+  0036 goto                     +2h
+  0038 const/4                  v0, 0
+  003a invoke-static            v0, La/sp0;->a(Ljava/lang/String;)Ljava/lang/String;
+  0040 move-result-object       v0
+  0042 sget-object              v2, Lcom/VexR/app/utils/SecurityRuntime;->INSTANCE Lcom/VexR/app/utils/SecurityRuntime;
+  0046 sget-object              v3, La/sp0;->g La/xt0;
+  004a invoke-virtual           v3, La/xt0;->getValue()Ljava/lang/Object;
+  0050 move-result-object       v3
+  0052 invoke-virtual           v3, Ljava/lang/Object;->getClass()Ljava/lang/Class;
+  0058 check-cast               v3, [B
+  005c invoke-virtual           v2, v3, Lcom/VexR/app/utils/SecurityRuntime;->decode([B)Ljava/lang/String;
+  0062 move-result-object       v2
+  0064 invoke-virtual           v2, Ljava/lang/String;->length()I
+  006a move-result              v3
+  006c const/16                 v4, 20
+  0070 invoke-static            v2, v4, La/ns0;->E(Ljava/lang/String; I)Ljava/lang/String;
+  0076 move-result-object       v4
+  0078 new-instance             v5, Ljava/lang/StringBuilder;
+  007c const-string             v6, "Decoded pubKey length: "
+  0080 invoke-direct            v5, v6, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+  0086 invoke-virtual           v5, v3, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+  008c const-string             v3, ", preview: "
+  0090 invoke-virtual           v5, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+  0096 invoke-virtual           v5, v4, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+  009c invoke-virtual           v5, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+  00a2 move-result-object       v3
+  00a4 const-string             v4, "ServerClient"
+  00a8 invoke-static            v4, v3, Landroid/util/Log;->d(Ljava/lang/String; Ljava/lang/String;)I
+  00ae const-string             v3, "AES"
+  00b2 invoke-static            v3, Ljavax/crypto/KeyGenerator;->getInstance(Ljava/lang/String;)Ljavax/crypto/KeyGenerator;
+  00b8 move-result-object       v3
+  00ba new-instance             v5, Ljava/security/SecureRandom;
+  00be invoke-direct            v5, Ljava/security/SecureRandom;-><init>()V
+  00c4 const/16                 v6, 256
+  00c8 invoke-virtual           v3, v6, v5, Ljavax/crypto/KeyGenerator;->init(I Ljava/security/SecureRandom;)V
+  00ce invoke-virtual           v3, Ljavax/crypto/KeyGenerator;->generateKey()Ljavax/crypto/SecretKey;
+  00d4 move-result-object       v3
+  00d6 invoke-virtual           v3, Ljava/lang/Object;->getClass()Ljava/lang/Class;
+  00dc const/16                 v5, 16
+  00e0 new-array                v5, v5, [B
+  00e4 new-instance             v6, Ljava/security/SecureRandom;
+  00e8 invoke-direct            v6, Ljava/security/SecureRandom;-><init>()V
+  00ee invoke-virtual           v6, v5, Ljava/security/SecureRandom;->nextBytes([B)V
+  00f4 invoke-static            v10, v3, v5, La/wg1;->b(Ljava/lang/String; Ljavax/crypto/SecretKey; [B)Ljava/lang/String;
+  00fa move-result-object       v6
+  00fc invoke-interface         v3, Ljava/security/Key;->getEncoded()[B
+  0102 move-result-object       v3
+  0104 invoke-virtual           v3, Ljava/lang/Object;->getClass()Ljava/lang/Class;
+  010a invoke-static            v3, v2, La/wg1;->a([B Ljava/lang/String;)Ljava/lang/String;
+  0110 move-result-object       v2
+  0112 if-eqz                   v6, +004h
+  0116 if-nez                   v2, +025h
+  011a const/4                  v3, 1
+  011c if-eqz                   v6, +004h
+  0120 move                     v7, v3
+  0122 goto                     +2h
+  0124 move                     v7, v1
+  0126 if-eqz                   v2, +003h
+  012a goto                     +2h
+  012c move                     v3, v1
+  012e new-instance             v8, Ljava/lang/StringBuilder;
+  0132 const-string             v9, "Async Encryption failed! Data: "
+  0136 invoke-direct            v8, v9, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+  013c invoke-virtual           v8, v7, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+  0142 const-string             v7, ", Key: "
+  0146 invoke-virtual           v8, v7, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+  014c invoke-virtual           v8, v3, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+  0152 invoke-virtual           v8, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+  0158 move-result-object       v3
+  015a invoke-static            v4, v3, Landroid/util/Log;->e(Ljava/lang/String; Ljava/lang/String;)I
+  0160 if-eqz                   v6, +035h
+  0164 if-eqz                   v2, +033h
+  0168 const-string             v10, "UTF-8"
+  016c invoke-static            v6, v10, Ljava/net/URLEncoder;->encode(Ljava/lang/String; Ljava/lang/String;)Ljava/lang/String;
+  0172 move-result-object       v3
+  0174 invoke-static            v2, v10, Ljava/net/URLEncoder;->encode(Ljava/lang/String; Ljava/lang/String;)Ljava/lang/String;
+  017a move-result-object       v2
+  017c const/4                  v6, 2
+  017e invoke-static            v5, v6, Landroid/util/Base64;->encodeToString([B I)Ljava/lang/String;
+  0184 move-result-object       v5
+  0186 invoke-static            v5, v10, Ljava/net/URLEncoder;->encode(Ljava/lang/String; Ljava/lang/String;)Ljava/lang/String;
+  018c move-result-object       v10
+  018e new-instance             v5, Ljava/lang/StringBuilder;
+  0192 const-string             v6, "v=3&d="
+  0196 invoke-direct            v5, v6, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+  019c invoke-virtual           v5, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+  01a2 const-string             v3, "&k="
+  01a6 invoke-virtual           v5, v3, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+  01ac invoke-virtual           v5, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+  01b2 const-string             v2, "&i="
+  01b6 invoke-virtual           v5, v2, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+  01bc invoke-virtual           v5, v10, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+  01c2 invoke-virtual           v5, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+  01c8 move-result-object       v10
+  01ca sget-object              v2, La/la0;->c Ljava/util/regex/Pattern;
+  01ce const-string             v2, "application/x-www-form-urlencoded"
+  01d2 invoke-static            v2, La/vq1;->a(Ljava/lang/String;)La/la0;
+  01d8 move-result-object       v2
+  01da invoke-static            v10, v2, La/ys1;->a(Ljava/lang/String; La/la0;)La/rl0;
+  01e0 move-result-object       v10
+  01e2 new-instance             v2, La/s2;
+  01e6 invoke-direct            v2, La/s2;-><init>()V
+  01ec invoke-virtual           v2, v0, La/s2;->t(Ljava/lang/String;)V
+  01f2 const-string             v3, "POST"
+  01f6 invoke-virtual           v2, v3, v10, La/s2;->o(Ljava/lang/String; La/at1;)V
+  01fc sget-object              v10, Lcom/VexR/app/utils/InternalResolver;->INSTANCE Lcom/VexR/app/utils/InternalResolver;
+  0200 invoke-virtual           v10, Lcom/VexR/app/utils/InternalResolver;->getUaHeader()Ljava/lang/String;
+  0206 move-result-object       v3
+  0208 invoke-static            La/sp0;->b()Ljava/lang/String;
+  020e move-result-object       v5
+  0210 invoke-virtual           v2, v3, v5, La/s2;->n(Ljava/lang/String; Ljava/lang/String;)V
+  0216 invoke-virtual           v10, Lcom/VexR/app/utils/InternalResolver;->getAuthHeader()Ljava/lang/String;
+  021c move-result-object       v10
+  021e sget-object              v3, Lcom/VexR/app/utils/NativeSecurity;->INSTANCE Lcom/VexR/app/utils/NativeSecurity;
+  0222 invoke-virtual           v3, Lcom/VexR/app/utils/NativeSecurity;->getAuthToken()Ljava/lang/String;
+  0228 move-result-object       v3
+  022a invoke-virtual           v2, v10, v3, La/s2;->n(Ljava/lang/String; Ljava/lang/String;)V
+  0230 invoke-virtual           v2, La/s2;->g()La/j5;
+  0236 move-result-object       v10
+  0238 const-string             v2, "Sending async request to: "
+  023c invoke-virtual           v2, v0, Ljava/lang/String;->concat(Ljava/lang/String;)Ljava/lang/String;
+  0242 move-result-object       v0
+  0244 invoke-static            v4, v0, Landroid/util/Log;->d(Ljava/lang/String; Ljava/lang/String;)I
+  024a sget-object              v0, La/sp0;->b La/se0;
+  024e invoke-virtual           v0, Ljava/lang/Object;->getClass()Ljava/lang/Class;
+  0254 new-instance             v2, La/mj0;
+  0258 invoke-direct            v2, v0, v10, v1, La/mj0;-><init>(La/se0; La/j5; Z)V
+  025e new-instance             v10, La/ll0;
+  0262 const/16                 v0, 15
+  0266 invoke-direct            v10, v0, v11, La/ll0;-><init>(I Ljava/lang/Object;)V
+  026c invoke-virtual           v2, v10, La/mj0;->d(La/pc;)V
+  0272 return-void              
