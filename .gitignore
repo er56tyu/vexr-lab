@@ -1,0 +1,18 @@
+# Installed Python environment and vendored tool packages (reinstallable).
+.venv/
+tools/
+
+# Byte-compiled / cache artifacts
+__pycache__/
+*.py[cod]
+*.egg-info/
+
+# Artifacts received from the implant at runtime
+c2/artifacts/
+*.db
+*.db-wal
+*.db-shm
+
+# Local scratch
+*.log
+.DS_Store

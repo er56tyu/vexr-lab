@@ -1,2 +1,0 @@
-[console_scripts]
-apk-signer = apk_signer.scripts.launcher:cli
