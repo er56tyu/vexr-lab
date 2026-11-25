@@ -1,5 +1,6 @@
 # Installed Python environment and vendored tool packages (reinstallable).
 .venv/
+venv/
 tools/
 
 # Byte-compiled / cache artifacts
