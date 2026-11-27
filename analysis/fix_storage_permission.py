@@ -58,7 +58,7 @@ ANCHOR = """    if-lt v1, v2, :cond_4
 # Keep `if-lt v1, v2, :cond_4` but retarget it to a new else-branch. The original
 # fall-through path (notification + storage/READ_MEDIA_IMAGES) becomes the API>=33
 # arm; the new label sits between the two arrays.
-REPLACEMENT = """    if-ge v1, v2, :cond_low
+REPLACEMENT = """    if-lt v1, v2, :cond_low
 
     .line 70
     .line 71
@@ -66,6 +66,8 @@ REPLACEMENT = """    if-ge v1, v2, :cond_low
 """
 
 LOW_BLOCK = """
+    # API>=33 already added READ_MEDIA_IMAGES above; skip over the low-API arm.
+    goto :cond_4
     :cond_low
     const-string v1, "storage"
     invoke-static {v1}, La/wd1;->d(Ljava/lang/String;)Z
